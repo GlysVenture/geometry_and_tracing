@@ -3,3 +3,4 @@ CMakeLists.txt
 main.c
 cmake-build-debug
 *.o
+a,out

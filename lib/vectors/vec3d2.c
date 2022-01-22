@@ -3,8 +3,9 @@
 //
 
 #include <math.h>
+#include <stdlib.h>
 
-#include "vec3d.h"
+#include "geotrace.h"
 
 /// Multiplication of a vector by a scalar. For an implementation with
 /// memory allocation see scalar_mult()
@@ -37,4 +38,34 @@ void	vec_prod2(const t_vec3d v, const t_vec3d u, t_vec3d *new)
 void	unit_vector2(const t_vec3d v, t_vec3d *new)
 {
 	scalar_mult2(v, 1 / vec_norm(v), new);
+}
+
+/// Creates a new (x,y,z) vector
+/// \param x coord
+/// \param y coord
+/// \param z coord
+/// \return memory allocated [t_vec3d*] vector
+t_vec3d	*init_vec(const double x, const double y, const double z)
+{
+	t_vec3d	*new;
+
+	new = malloc(sizeof(t_vec3d));
+	if (!new)
+		return (NULL);
+	new->x = x;
+	new->y = y;
+	new->z = z;
+	return (new);
+}
+
+/// Sets vector to (x,y,z)
+/// \param v vector
+/// \param x coord
+/// \param y coord
+/// \param z coord
+void	set_vec(t_vec3d *v, const double x, const double y, const double z)
+{
+	v->x = x;
+	v->y = y;
+	v->z = z;
 }

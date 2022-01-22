@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "vec3d.h"
+#include "geotrace.h"
 
 /// Multiplication of a vector by a scalar. For an implementation without memory allocation see scalar_mult2()
 /// \param v vector
