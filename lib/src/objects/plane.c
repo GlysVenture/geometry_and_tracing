@@ -34,6 +34,5 @@ double	plane_intersect(t_plane *plane, t_line ray)
 	if (angle == 0)
 		return (-1);
 	vec_subtract(plane->point, ray.point, &ray.point);
-	return (dot_prod(plane->normal, ray.point)
-		/ angle);
+	return (dot_prod(plane->normal, ray.point) / angle);
 }
