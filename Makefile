@@ -9,7 +9,6 @@ NAME = minitrace
 
 INC_FLAGS := -Ilib
 LIB := lib/libgeotrace.a
-LIB_OBJS =
 
 LIBS := -Llib -lgeotrace -lm
 
@@ -20,16 +19,18 @@ OBJS = ${SRCS:%=%.o}
 	@echo Compiling $@
 	@$(CC) -c  $(CFLAGS) $(INC_FLAGS) $< -o $@
 
-all:
+all:	library
 	@$(MAKE) $(NAME)
 
 $(NAME):	$(LIB) $(OBJS)
 	@echo Linking $@
 	@$(CC) $(CFLAGS) $(INC_FLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
+library:
+	@$(MAKE) -C lib
+
 $(LIB):
 	@$(MAKE) -C lib
-	@echo $@ done
 
 clean:
 	@rm -rf $(OBJS)

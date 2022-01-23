@@ -10,7 +10,7 @@ int main() {
 	ray.point.x = 0;
 	ray.point.y = 0;
 	ray.point.z = 0;
-	ray.direction.x = 1;
+	ray.direction.x = 2;
 	ray.direction.y = 0;
 	ray.direction.z = 0;
 
