@@ -60,7 +60,7 @@ void	set_vec(t_vec3d *v, double x, double y, double z);
 
 void	vec_sum(t_vec3d v, t_vec3d u, t_vec3d *new);
 
-void	vec_subtract(const t_vec3d v, const t_vec3d u, t_vec3d *new);
+void	vec_subtract(t_vec3d v, t_vec3d u, t_vec3d *new);
 
 //Sphere funcs
 

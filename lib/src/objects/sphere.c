@@ -39,7 +39,7 @@ double	sphere_intersect(t_sphere *sphere, t_line ray)
 
 	vec_subtract(ray.point, sphere->center, &ray.point);
 	unit_vector2(ray.direction, &ray.direction); // todo all rays have unit vectors better sol
-	quad[0] = dot_prod(ray.point, ray.point) - pow(sphere->radius, 2); //todo precomputed dot prods
+	quad[0] = dot_prod(ray.point, ray.point) - pow(sphere->radius, 2);
 	quad[1] = dot_prod(ray.point, ray.direction) * 2;
 	delta = pow(quad[1], 2) - 4 * quad[0] * 1;
 	if (delta < 0)
