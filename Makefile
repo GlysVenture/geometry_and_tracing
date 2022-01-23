@@ -9,6 +9,7 @@ NAME = minitrace
 
 INC_FLAGS := -Ilib
 LIB := lib/libgeotrace.a
+LIB_OBJS =
 
 LIBS := -Llib -lgeotrace -lm
 
@@ -25,7 +26,6 @@ all:
 $(NAME):	$(LIB) $(OBJS)
 	@echo Linking $@
 	@$(CC) $(CFLAGS) $(INC_FLAGS) $(OBJS) $(LIBS) -o $(NAME)
-	@$(MAKE) -C lib fclean
 
 $(LIB):
 	@$(MAKE) -C lib
