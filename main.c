@@ -3,8 +3,8 @@
 #include "geotrace.h"
 
 int main() {
-	t_line		ray;
-	t_sphere	sphere;
+	t_line	ray;
+	t_plane	plane;
 
 	//ray
 	ray.point.x = 0;
@@ -15,12 +15,10 @@ int main() {
 	ray.direction.z = 0;
 
 	//sphere
-	sphere.radius = 2;
-	sphere.center.x = 4;
-	sphere.center.y = 2;
-	sphere.center.z = 0;
+	set_vec(&plane.point, -2, 0, 0);
+	set_vec(&plane.normal, 0, 1, 0);
 
-	printf("intersect distance: %f\n", sphere_intersect(&sphere, ray));
+	printf("intersect distance: %f\n", plane_intersect(&plane, ray));
 
 	return 0;
 }

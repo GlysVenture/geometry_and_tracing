@@ -25,6 +25,7 @@ all:
 $(NAME):	$(LIB) $(OBJS)
 	@echo Linking $@
 	@$(CC) $(CFLAGS) $(INC_FLAGS) $(OBJS) $(LIBS) -o $(NAME)
+	@$(MAKE) -C lib fclean
 
 $(LIB):
 	@$(MAKE) -C lib
@@ -40,3 +41,7 @@ fclean:
 	@rm -f $(NAME)
 	@$(MAKE) -C lib fclean
 	@echo Fclean done
+
+re:		fclean all
+
+.PHONY:	all clean fclean re

@@ -27,10 +27,10 @@ t_sphere	*init_sphere(double radius, double cx, double cy, double cz)
 	return (new);
 }
 
-/// Computes if a sphere intersects a certain ray and returns the distance. If it doesnt returns -1;
+/// Computes if a sphere intersects a certain ray and returns the distance. If it doesnt returns -1
 /// \param sphere
 /// \param ray
-/// \return distance to intersection or -1 for no intersection;
+/// \return distance to intersection or -1 for no intersection
 double	sphere_intersect(t_sphere *sphere, t_line ray)
 {
 	double 	res[2];

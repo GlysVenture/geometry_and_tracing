@@ -27,6 +27,15 @@ typedef struct s_line
 	t_vec3d point;
 }	t_line;
 
+/// plane defined by normal vector and a point.
+/// \param direction
+/// \param point
+typedef struct s_plane
+{
+	t_vec3d	normal;
+	t_vec3d point;
+}	t_plane;
+
 /// 3d Sphere
 /// \param center
 /// \param radius
@@ -71,5 +80,11 @@ double	sphere_intersect(t_sphere *sphere, t_line ray);
 //Line funcs
 
 t_line	*init_line(t_vec3d dir, t_vec3d p);
+
+//plane funcs
+
+t_plane	*init_plane(t_vec3d normal, t_vec3d p);
+
+double	plane_intersect(t_plane *plane, t_line ray);
 
 #endif //GEOTRACE_H
