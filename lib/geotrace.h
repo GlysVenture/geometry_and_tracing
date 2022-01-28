@@ -18,6 +18,17 @@ typedef struct s_vec3d
 	double	z;
 }	t_vec3d;
 
+/// 3x3 matrix
+/// \param x 1st line
+/// \param y 2nd line
+/// \param z 3rd line
+typedef struct s_matrix
+{
+	t_vec3d x;
+	t_vec3d y;
+	t_vec3d z;
+}	t_matrix;
+
 /// line (or ray) along direction and passing through a point.
 /// \param direction
 /// \param point
@@ -70,6 +81,24 @@ void	set_vec(t_vec3d *v, double x, double y, double z);
 void	vec_sum(t_vec3d v, t_vec3d u, t_vec3d *new);
 
 void	vec_subtract(t_vec3d v, t_vec3d u, t_vec3d *new);
+
+//Matrix funcs
+
+void		set_matrix(t_matrix *a, t_vec3d x, t_vec3d y, t_vec3d z);
+
+void		set_matrix_spot(t_matrix *a, int line, int column, double val);
+
+t_matrix	*init_matrix(t_vec3d x, t_vec3d y, t_vec3d z);
+
+void		matrix_transpose(t_matrix a, t_matrix *b);
+
+void		matrix_vect_prod(t_matrix a, t_vec3d v, t_vec3d *u);
+
+void		matrix_prod(t_matrix a, t_matrix b, t_matrix *c);
+
+double		matrix_determinant(t_matrix a);
+
+void		inverse_matrix(t_matrix a, t_matrix *b);
 
 //Sphere funcs
 
