@@ -2,76 +2,89 @@
 // Created by tkondrac on 28.01.22.
 //
 
+#include <stdio.h>
+
 #include "geotrace.h"
 
 /// Computes the transpose of matrix
 /// \param a matrix
 /// \param b pointer to result matrix
-void	matrix_transpose(t_matrix a, t_matrix *b)
+double	**matrix_transpose(const t_matrix a, t_matrix b)
 {
-	b->x.x = a.x.x;
-	b->x.y = a.y.x;
-	b->x.z = a.z.x;
-	b->y.x = a.x.y;
-	b->y.y = a.y.y;
-	b->y.z = a.z.y;
-	b->z.x = a.x.z;
-	b->z.y = a.y.z;
-	b->z.z = a.z.z;
+	t_vec3d v[3];
+
+	v[0][0] = a[0][0];
+	v[0][1] = a[1][0];
+	v[0][2] = a[2][0];
+	v[1][0] = a[0][1];
+	v[1][1] = a[1][1];
+	v[1][2] = a[2][1];
+	v[2][0] = a[0][2];
+	v[2][1] = a[1][2];
+	v[2][2] = a[2][2];
+	set_matrix(b, v[0], v[1], v[2]);
+	return ((double **) b);
 }
 
-double	m_val(t_matrix *a, int row, int column)
-{
-	double val;
-
-	val = ((double *)(((t_vec3d *)a) + row))[column];
-	return (val);
-}
-
-double	get_cofactor(t_matrix a, int row, int column)
+double	get_cofactor(const t_matrix a, int r, int c)
 {
 	double val;
 
-	val = m_val(&a, (row + 1) % 3, (column + 1) % 3)
-		 * m_val(&a, (row + 2) % 3, (column + 2) % 3)
-		 - m_val(&a, (row + 2) % 3, (column + 1) % 3)
-		   * m_val(&a, (row + 1) % 3, (column + 2) % 3);
+	val = a[(r + 1) % 3][(c + 1) % 3]
+			* a[(r + 2) % 3][(c + 2) % 3]
+		- a[(r + 2) % 3][(c + 1) % 3]
+			* a[(r + 1) % 3][(c + 2) % 3];
 	return (val);
 }
 
-double	matrix_determinant(t_matrix a)
+double	matrix_determinant(const t_matrix a)
 {
 	double	d;
 
-	d = a.x.x * (a.y.y * a.z.z - a.z.y * a.y.z);
-	d -= a.x.y * (a.y.x * a.z.z - a.z.x * a.y.z);
-	d += a.x.z * (a.y.x * a.z.y - a.z.x * a.y.y);
+	d = a[0][0] * get_cofactor(a, 0, 0);
+	d += a[0][1] * get_cofactor(a, 0, 1);
+	d += a[0][2] * get_cofactor(a, 0, 2);
 	return (d);
 }
 
-void	cofactor_matrix(t_matrix a, t_matrix *c)
+double	**cofactor_matrix(const t_matrix a, t_matrix c)
 {
-	c->x.x = get_cofactor(a, 0, 0);
-	c->x.y = get_cofactor(a, 0, 1);
-	c->x.z = get_cofactor(a, 0, 2);
-	c->y.x = get_cofactor(a, 1, 0);
-	c->y.y = get_cofactor(a, 1, 1);
-	c->y.z = get_cofactor(a, 1, 2);
-	c->z.x = get_cofactor(a, 2, 0);
-	c->z.y = get_cofactor(a, 2, 1);
-	c->z.z = get_cofactor(a, 2, 2);
+	t_vec3d v[3];
+
+	v[0][0] = get_cofactor(a, 0, 0);
+	v[0][1] = get_cofactor(a, 0, 1);
+	v[0][2] = get_cofactor(a, 0, 2);
+	v[1][0] = get_cofactor(a, 1, 0);
+	v[1][1] = get_cofactor(a, 1, 1);
+	v[1][2] = get_cofactor(a, 1, 2);
+	v[2][0] = get_cofactor(a, 2, 0);
+	v[2][1] = get_cofactor(a, 2, 1);
+	v[2][2] = get_cofactor(a, 2, 2);
+	set_matrix(c, v[0], v[1], v[2]);
+	return ((double **) c);
 }
 
-void	matrix_scalar_mult(t_matrix a, double scalar, t_matrix *b)
+double	**matrix_scalar_mult(const t_matrix a, double scalar, t_matrix b)
 {
-	scalar_mult2(a.x, scalar, &b->x);
-	scalar_mult2(a.y, scalar, &b->y);
-	scalar_mult2(a.z, scalar, &b->z);
+	scalar_mult(a[0], scalar, b[0]);
+	scalar_mult(a[1], scalar, b[1]);
+	scalar_mult(a[2], scalar, b[2]);
+	return ((double **) b);
 }
 
-void	inverse_matrix(t_matrix a, t_matrix *b)
+double	**inverse_matrix(t_matrix a, t_matrix b)
 {
 	cofactor_matrix(a, b);
-	matrix_transpose(*b, b);
-	matrix_scalar_mult(*b, 1 / matrix_determinant(a), b);
+	matrix_transpose(b, b);
+	matrix_scalar_mult(b, 1 / matrix_determinant(a), b);
+	return ((double **) b);
+}
+
+void	print_matrix(const t_matrix a)
+{
+	printf("matrix\n");
+	printf("| %.3f : %.3f : %.3f |\n", a[0][0], a[0][1], a[0][2]);
+	printf("| %.3f : %.3f : %.3f |\n", a[1][0], a[1][1], a[1][2]);
+	printf("| %.3f : %.3f : %.3f |\n", a[2][0], a[2][1], a[2][2]);
+	printf("determinant : %.3f\n", matrix_determinant(a));
 }

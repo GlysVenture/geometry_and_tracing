@@ -8,26 +8,13 @@
 //Structs
 
 /// mathematical vector
-/// \param x coord
-/// \param y coord
-/// \param z coord
-typedef struct s_vec3d
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_vec3d;
+/// \param xyz coordinates
+typedef double	t_vec3d[3];
 
 /// 3x3 matrix
-/// \param x 1st line
-/// \param y 2nd line
-/// \param z 3rd line
-typedef struct s_matrix
-{
-	t_vec3d x;
-	t_vec3d y;
-	t_vec3d z;
-}	t_matrix;
+/// \param i line
+/// \param j column
+typedef double	t_matrix[3][3];
 
 /// line (or ray) along direction and passing through a point.
 /// \param direction
@@ -58,47 +45,41 @@ typedef struct s_sphere
 
 //Vector funcs
 
-t_vec3d	*scalar_mult(t_vec3d v, double a);
+double	*scalar_mult(const t_vec3d v, double a, t_vec3d w);
 
-double	dot_prod(t_vec3d v, t_vec3d u);
+double	dot_prod(const t_vec3d v, const t_vec3d u);
 
-t_vec3d	*vec_prod(t_vec3d v, t_vec3d u);
+double	*vec_prod(const t_vec3d v, const t_vec3d u, t_vec3d w);
 
-double	vec_norm(t_vec3d v);
+double	vec_norm(const t_vec3d v);
 
-t_vec3d	*unit_vector(t_vec3d v);
+double	*unit_vector(t_vec3d v, t_vec3d unit);
 
-void	scalar_mult2(t_vec3d v, double a, t_vec3d *new);
+double	*set_vec(t_vec3d v, double x, double y, double z);
 
-void	vec_prod2(t_vec3d v, t_vec3d u, t_vec3d *new);
+double	*vec_sum(const t_vec3d v, const t_vec3d u, t_vec3d new);
 
-void	unit_vector2(t_vec3d v, t_vec3d *new);
-
-t_vec3d	*init_vec(double x, double y, double z);
-
-void	set_vec(t_vec3d *v, double x, double y, double z);
-
-void	vec_sum(t_vec3d v, t_vec3d u, t_vec3d *new);
-
-void	vec_subtract(t_vec3d v, t_vec3d u, t_vec3d *new);
+double	*vec_subtract(const t_vec3d v, const t_vec3d u, t_vec3d new);
 
 //Matrix funcs
 
-void		set_matrix(t_matrix *a, t_vec3d x, t_vec3d y, t_vec3d z);
+double	**set_matrix(t_matrix a, const t_vec3d x, const t_vec3d y, const t_vec3d z);
 
-void		set_matrix_spot(t_matrix *a, int line, int column, double val);
+double	**matrix_transpose(const t_matrix a, t_matrix b);
 
-t_matrix	*init_matrix(t_vec3d x, t_vec3d y, t_vec3d z);
+double	*matrix_vect_prod(const t_matrix a, const t_vec3d v, t_vec3d u);
 
-void		matrix_transpose(t_matrix a, t_matrix *b);
+double	**matrix_prod(t_matrix a, t_matrix b, t_matrix c);
 
-void		matrix_vect_prod(t_matrix a, t_vec3d v, t_vec3d *u);
+double	**matrix_scalar_mult(const t_matrix a, double scalar, t_matrix b);
 
-void		matrix_prod(t_matrix a, t_matrix b, t_matrix *c);
+double	matrix_determinant(const t_matrix a);
 
-double		matrix_determinant(t_matrix a);
+double	**inverse_matrix(t_matrix a, t_matrix b);
 
-void		inverse_matrix(t_matrix a, t_matrix *b);
+double	**cofactor_matrix(const t_matrix a, t_matrix c);
+
+void	print_matrix(const t_matrix a);
 
 //Sphere funcs
 
@@ -108,7 +89,7 @@ double	sphere_intersect(t_sphere *sphere, t_line ray);
 
 //Line funcs
 
-t_line	*init_line(t_vec3d dir, t_vec3d p);
+t_line	*init_line(const t_vec3d dir, const t_vec3d p);
 
 //plane funcs
 
