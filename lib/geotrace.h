@@ -57,9 +57,13 @@ double	*unit_vector(t_vec3d v, t_vec3d unit);
 
 double	*set_vec(t_vec3d v, double x, double y, double z);
 
+double	*set_vec2(t_vec3d v, const t_vec3d u);
+
 double	*vec_sum(const t_vec3d v, const t_vec3d u, t_vec3d new);
 
 double	*vec_subtract(const t_vec3d v, const t_vec3d u, t_vec3d new);
+
+double	get_angle(const t_vec3d v, const t_vec3d u);
 
 //Matrix funcs
 

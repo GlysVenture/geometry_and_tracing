@@ -35,9 +35,13 @@ double	dot_prod(const t_vec3d v, const t_vec3d u)
 /// \return u ^ v
 double	*vec_prod(const t_vec3d v, const t_vec3d u, t_vec3d w)
 {
-	w[0] = v[1] * u[2] - v[2] * u[1];
-	w[1] = v[2] * u[0] - v[0] * u[2];
+	t_vec3d	t;
+
+	t[0] = v[1] * u[2] - v[2] * u[1];
+	t[1] = v[2] * u[0] - v[0] * u[2];
 	w[2] = v[0] * u[1] - v[1] * u[0];
+	w[0] = t[0];
+	w[1] = t[1];
 	return (w);
 }
 

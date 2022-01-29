@@ -20,6 +20,17 @@ double	*set_vec(t_vec3d v, const double x, const double y, const double z)
 	return (v);
 }
 
+/// Sets vector to another vector
+/// \param v vector to be set
+/// \param u source vector
+double	*set_vec2(t_vec3d v, const t_vec3d u)
+{
+	v[0] = u[0];
+	v[1] = u[1];
+	v[2] = u[2];
+	return (v);
+}
+
 /// Computes sum of 2 vectors
 /// \param v vector
 /// \param u vector
