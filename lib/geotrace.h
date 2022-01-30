@@ -111,6 +111,8 @@ t_line	*init_line(const t_vec3d dir, const t_vec3d p);
 
 void	transform_ray(const t_matrix m, const t_vec3d translation, t_line *ray);
 
+void	print_line(t_line line);
+
 //plane funcs
 
 t_plane	*init_plane(t_vec3d normal, t_vec3d p);
@@ -118,5 +120,13 @@ t_plane	*init_plane(t_vec3d normal, t_vec3d p);
 double	plane_intersect(t_plane *plane, t_line ray);
 
 double	plane_intersect2(t_object *plane, t_line ray, t_vec3d hit, t_vec3d normal);
+
+//cylinder funcs
+
+double	cylinder_intersect2(t_object *cyl, t_line ray, t_vec3d hit, t_vec3d normal);
+
+//math utilities
+
+void	solve_quad(const double quad[], double res[]);
 
 #endif //GEOTRACE_H

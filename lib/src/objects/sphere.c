@@ -58,33 +58,28 @@ double	sphere_intersect(t_sphere *sphere, t_line ray)
 }
 
 /// Computes if a sphere intersects a certain ray and returns the closest
-/// intersect distance. If it doesnt returns -1
+/// intersect distance. If it doesnt returns -1. sets hit and normal
+/// \warning hit and normal is not translated back yet and normal might be wrong direction.
+/// Both of those should be taken care of when intersected object
+/// is known to be the one
 /// \param sphere
 /// \param ray
+/// \param hit return hit point
+/// \param normal return normal to object hit point
 /// \return distance to intersection or -1 for no intersection
 double	sphere_intersect2(t_object *sphere, t_line ray, t_vec3d hit, t_vec3d normal)
 {
 	double 	res[2];
 	double	quad[2];
-	double	delta;
 
 	transform_ray(sphere->inv, sphere->tr_vec, &ray);
 	quad[0] = dot_prod(ray.point, ray.point) - 1;
 	quad[1] = dot_prod(ray.point, ray.direction) * 2;
-	delta = pow(quad[1], 2) - 4 * quad[0] * 1;
-	if (isless(delta, FLT_EPSILON))
+	solve_quad(quad, res);
+	if (isless(res[0], 0))
 		return (-1);
-	if (fabs(delta) <= FLT_EPSILON)
-		res[0] = - quad[1] / 2;
-	else
-	{
-		res[0] = (sqrt(delta) - quad[1]) / 2;
-		res[1] = - (sqrt(delta) + quad[1]) / 2;
-		if (isgreaterequal(res[1], FLT_EPSILON) && isgreaterequal(res[0], FLT_EPSILON) && isless(res[1], res[0]))
-			res[0] = res[1];
-	}
 	scalar_mult(ray.direction, res[0], hit);
-	matrix_vect_prod(sphere->transformation, hit, hit);
 	set_vec2(normal, hit);
+	matrix_vect_prod(sphere->transformation, hit, hit);
 	return (vec_norm(hit));
 }

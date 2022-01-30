@@ -4,6 +4,7 @@
 
 #include <math.h>
 #include "stdlib.h"
+#include <stdio.h>
 
 #include "geotrace.h"
 
@@ -29,8 +30,14 @@ t_line	*init_line(const t_vec3d dir, const t_vec3d p)
 /// \param ray to be changed (warning destructive!)
 void	transform_ray(const t_matrix m, const t_vec3d translation, t_line *ray)
 {
-	vec_subtract(translation, ray->point, ray->point);
+	vec_subtract(ray->point, translation, ray->point);
 	matrix_vect_prod(m, ray->point, ray->point);
 	matrix_vect_prod(m, ray->direction, ray->direction);
 	unit_vector(ray->direction, ray->direction);
+}
+
+void	print_line(t_line line)
+{
+	printf("-- Line:\npoint:\n%f\n%f\n%f\n", line.point[0], line.point[1], line.point[2]);
+	printf("direction:\n%f\n%f\n%f\n", line.direction[0], line.direction[1], line.direction[2]);
 }

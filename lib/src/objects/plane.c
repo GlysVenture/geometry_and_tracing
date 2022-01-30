@@ -39,10 +39,15 @@ double	plane_intersect(t_plane *plane, t_line ray)
 	return (dot_prod(plane->normal, ray.point) / angle);
 }
 
-/// Computes if a plane intersects a certain ray and returns the distance. If it doesnt returns -1
+/// Computes if a plane intersects a certain ray and returns the distance.
+/// If it doesnt returns -1. sets hit and normal
+/// \warning hit and normal is not translated back yet and normal might be wrong direction.
+/// Both of those should be taken care of when intersected object
+/// is known to be the one
 /// \param object plane
 /// \param ray
-/// \param hit wil be filled with closest intersection point result
+/// \param hit return hit point
+/// \param normal return normal to object hit point
 /// \return distance to plane intersect or -1 if parallel
 double	plane_intersect2(t_object *plane, t_line ray, t_vec3d hit, t_vec3d normal)
 {

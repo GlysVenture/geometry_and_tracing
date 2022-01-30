@@ -3,20 +3,19 @@
 #include "geotrace.h"
 
 int main() {
-	t_line	ray = {{0, 1, 0}, { 1, -2, 2 }};
-	t_line	ray2 = {{1, 0, 0}, { -2, 0, 2}};
-//	t_plane	plane = {{-5, 1, 1}, {0, 1, 0}};
-	t_matrix a = {{1,0,0},{0,1,0},{0,0,3}};
-	t_object sphere;
-	t_vec3d p;
+	t_line	ray = {{0, 1, 0}, { 3, -3, 4}};
+	t_line	ray2 = {{1, 0, 0}, { -2, 0, 0}};
+	t_matrix a = {{3.5,0,0},{0,4,0},{0,0,5}};
+	t_object obj;
+	t_vec3d p, d;
 
-	set_matrix(sphere.transformation, a[0], a[1], a[2]);
-	inverse_matrix(sphere.transformation, sphere.inv);
-	matrix_transpose(sphere.inv, sphere.inv_transp);
-	set_vec(sphere.tr_vec, 1, 0, 0);
+	set_matrix(obj.transformation, a[0], a[1], a[2]);
+	inverse_matrix(obj.transformation, obj.inv);
+	matrix_transpose(obj.inv, obj.inv_transp);
+	set_vec(obj.tr_vec, 1, 0, 0);
 
-	printf("intersect distance: %f\n", sphere_intersect2(&sphere, ray, p));
-	printf("intersect distance: %f\n", sphere_intersect2(&sphere, ray2, p));
+	printf("intersect distance: %f\n", cylinder_intersect2(&obj, ray, p, d));
+	printf("intersect distance: %f\n", cylinder_intersect2(&obj, ray2, p, d));
 
 	return 0;
 }
