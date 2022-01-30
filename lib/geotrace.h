@@ -103,7 +103,7 @@ t_sphere	*init_sphere(double radius, double cx, double cy, double cz);
 
 double	sphere_intersect(t_sphere *sphere, t_line ray);
 
-double	sphere_intersect2(t_object *sphere, t_line ray, t_vec3d hit);
+double	sphere_intersect2(t_object *sphere, t_line ray, t_vec3d hit, t_vec3d normal);
 
 //Line funcs
 
@@ -117,6 +117,6 @@ t_plane	*init_plane(t_vec3d normal, t_vec3d p);
 
 double	plane_intersect(t_plane *plane, t_line ray);
 
-double	plane_intersect2(t_object *plane, t_line ray, t_vec3d hit);
+double	plane_intersect2(t_object *plane, t_line ray, t_vec3d hit, t_vec3d normal);
 
 #endif //GEOTRACE_H

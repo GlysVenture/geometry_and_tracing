@@ -44,12 +44,13 @@ double	plane_intersect(t_plane *plane, t_line ray)
 /// \param ray
 /// \param hit wil be filled with closest intersection point result
 /// \return distance to plane intersect or -1 if parallel
-double	plane_intersect2(t_object *plane, t_line ray, t_vec3d hit)
+double	plane_intersect2(t_object *plane, t_line ray, t_vec3d hit, t_vec3d normal)
 {
 	transform_ray(plane->inv, plane->tr_vec, &ray);
 	if (fabs(ray.direction[2]) <= FLT_EPSILON)
 		return (-1);
 	scalar_mult(ray.direction, - ray.point[2] / ray.direction[2], hit);
 	matrix_vect_prod(plane->transformation, hit, hit);
+	set_vec(normal, 1, 0, 0);
 	return (vec_norm(hit));
 }

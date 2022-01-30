@@ -62,7 +62,7 @@ double	sphere_intersect(t_sphere *sphere, t_line ray)
 /// \param sphere
 /// \param ray
 /// \return distance to intersection or -1 for no intersection
-double	sphere_intersect2(t_object *sphere, t_line ray, t_vec3d hit)
+double	sphere_intersect2(t_object *sphere, t_line ray, t_vec3d hit, t_vec3d normal)
 {
 	double 	res[2];
 	double	quad[2];
@@ -85,5 +85,6 @@ double	sphere_intersect2(t_object *sphere, t_line ray, t_vec3d hit)
 	}
 	scalar_mult(ray.direction, res[0], hit);
 	matrix_vect_prod(sphere->transformation, hit, hit);
+	set_vec2(normal, hit);
 	return (vec_norm(hit));
 }
