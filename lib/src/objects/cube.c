@@ -60,6 +60,10 @@ static void	add_bounds(double res[], double temp[])
 		res[1] = temp[1];
 }
 
+/// fills in 2 intersect points of 6 planes of a cube
+/// \param ray
+/// \param res
+/// \return 1 if success, 0 if failure (parrallel and out of bounds)
 static int	get_res(t_line *ray, double res[])
 {
 	double	temp[3][2];
@@ -103,6 +107,17 @@ static void	get_cube_normal(t_vec3d hit, t_vec3d normal)
 		set_vec(normal, 0, 0, 1);
 }
 
+/// Computes if a cube intersects a certain ray and returns the closest
+///// intersect distance. If it doesnt returns -1. sets hit and normal
+/// \warning hit is not translated, normal not yet transformed back yet
+/// and normal might be wrong direction.
+/// Both of those should be taken care of when intersected object
+/// is known to be the one
+/// \param cube cube
+/// \param ray
+/// \param hit return hit point
+/// \param normal return normal to object hit point
+/// \return distance to intersection or -1 for no intersection
 double	cube_intersect2(t_object *cube, t_line ray, t_vec3d hit, t_vec3d normal)
 {
 	double	res[2];

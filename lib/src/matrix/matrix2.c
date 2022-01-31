@@ -26,6 +26,11 @@ double	**matrix_transpose(const t_matrix a, t_matrix b)
 	return ((double **) b);
 }
 
+/// Computes the cofactor matrix component at for specified row and column
+/// \param a matrix
+/// \param r row
+/// \param c column
+/// \return cofactor component
 double	get_cofactor(const t_matrix a, int r, int c)
 {
 	double val;
@@ -37,6 +42,9 @@ double	get_cofactor(const t_matrix a, int r, int c)
 	return (val);
 }
 
+/// Computes the matrix determinant of given matrix
+/// \param a matrix
+/// \return matrix determinant
 double	matrix_determinant(const t_matrix a)
 {
 	double	d;
@@ -47,6 +55,10 @@ double	matrix_determinant(const t_matrix a)
 	return (d);
 }
 
+/// Computes the cofactor matrix
+/// \param a matrix
+/// \param c result matrix
+/// \return cofactor matrix
 double	**cofactor_matrix(const t_matrix a, t_matrix c)
 {
 	t_vec3d v[3];
@@ -64,6 +76,11 @@ double	**cofactor_matrix(const t_matrix a, t_matrix c)
 	return ((double **) c);
 }
 
+/// Multiplies matrix by scalar
+/// \param a matrix
+/// \param scalar
+/// \param b result matrix
+/// \return scalar * a
 double	**matrix_scalar_mult(const t_matrix a, double scalar, t_matrix b)
 {
 	scalar_mult(a[0], scalar, b[0]);
@@ -72,6 +89,10 @@ double	**matrix_scalar_mult(const t_matrix a, double scalar, t_matrix b)
 	return ((double **) b);
 }
 
+/// Computes inverse of a matrix
+/// \param a matrix
+/// \param b result matrix
+/// \return a ^ -1
 double	**inverse_matrix(t_matrix a, t_matrix b)
 {
 	cofactor_matrix(a, b);
@@ -80,6 +101,8 @@ double	**inverse_matrix(t_matrix a, t_matrix b)
 	return ((double **) b);
 }
 
+/// Prints matrix to STDOUT
+/// \param a matrix
 void	print_matrix(const t_matrix a)
 {
 	printf("matrix\n");
