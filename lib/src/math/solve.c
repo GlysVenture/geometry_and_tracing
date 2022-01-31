@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-static void	swap(double *a, double *b)
+void	swap(double *a, double *b)
 {
 	double t;
 

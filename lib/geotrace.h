@@ -51,7 +51,8 @@ typedef struct s_object
 	t_matrix	inv;
 	t_matrix	inv_transp;
 	t_vec3d		tr_vec;
-	int			colors[3];
+	int			colors[2];
+	int			k_ratio[3];
 	void		*params;
 }	t_object;
 
@@ -125,8 +126,14 @@ double	plane_intersect2(t_object *plane, t_line ray, t_vec3d hit, t_vec3d normal
 
 double	cylinder_intersect2(t_object *cyl, t_line ray, t_vec3d hit, t_vec3d normal);
 
+//cube funcs
+
+double	cube_intersect2(t_object *cube, t_line ray, t_vec3d hit, t_vec3d normal);
+
 //math utilities
 
 void	solve_quad(const double quad[], double res[]);
+
+void	swap(double *a, double *b);
 
 #endif //GEOTRACE_H
