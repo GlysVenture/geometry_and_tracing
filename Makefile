@@ -12,6 +12,12 @@ LIB := lib/libgeotrace.a
 
 LIBS := -Llib -lgeotrace -lm
 
+TEST_DIRS ?= tests
+
+TEST_SRC = $(wildcard $(TEST_DIRS)/*.c)
+TEST_BINS = $(patsubst $(TEST_DIRS)/%.c, $(TEST_DIRS)/bin/%, $(TEST_SRC))
+TEST_INC = -I/Users/tkondrac/.brew/Cellar/criterion/2.3.3-bleeding4/include
+
 SRCS = main.c
 OBJS = ${SRCS:%=%.o}
 
@@ -32,8 +38,18 @@ library:
 $(LIB):
 	@$(MAKE) -C lib
 
+$(TEST_DIRS)/bin/%:	$(TEST_DIRS)/%.c
+	$(CC) $(CFLAGS) $< $(INC_FLAGS) $(TEST_INC) $(LIBS) -o $@ -L/Users/tkondrac/.brew/Cellar/criterion/2.3.3-bleeding4/lib -lcriterion
+
+$(TEST_DIRS)/bin:
+	mkdir $@
+
+test: $(LIB) $(TEST_DIRS)/bin $(TEST_BINS)
+	@for test in $(TEST_BINS) ; do echo Testing: $$test ; ./$$test ; done
+
 clean:
 	@rm -rf $(OBJS)
+	@rm -rf $(TEST_DIRS)/bin
 	@$(MAKE) -C lib clean
 	@echo Clean done
 
@@ -45,4 +61,4 @@ fclean:
 
 re:		fclean all
 
-.PHONY:	all clean fclean re
+.PHONY:	all clean fclean re test
