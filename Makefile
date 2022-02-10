@@ -16,7 +16,7 @@ TEST_DIRS ?= tests
 
 TEST_SRC = $(wildcard $(TEST_DIRS)/*.c)
 TEST_BINS = $(patsubst $(TEST_DIRS)/%.c, $(TEST_DIRS)/bin/%, $(TEST_SRC))
-TEST_INC = -I/Users/tkondrac/.brew/Cellar/criterion/2.3.3-bleeding4/include
+TEST_INC = -I$(HOME)/.brew/Cellar/criterion/2.3.3-bleeding4/include
 
 SRCS = main.c
 OBJS = ${SRCS:%=%.o}
@@ -39,7 +39,7 @@ $(LIB):
 	@$(MAKE) -C lib
 
 $(TEST_DIRS)/bin/%:	$(TEST_DIRS)/%.c
-	$(CC) $(CFLAGS) $< $(INC_FLAGS) $(TEST_INC) $(LIBS) -o $@ -L/Users/tkondrac/.brew/Cellar/criterion/2.3.3-bleeding4/lib -lcriterion
+	$(CC) $(CFLAGS) $< $(INC_FLAGS) $(TEST_INC) $(LIBS) -o $@ -L$(HOME)/.brew/Cellar/criterion/2.3.3-bleeding4/lib -lcriterion
 
 $(TEST_DIRS)/bin:
 	mkdir $@
