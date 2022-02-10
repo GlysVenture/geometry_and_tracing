@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrix.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkondrac <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/07 18:56:28 by tkondrac          #+#    #+#             */
+/*   Updated: 2022/02/07 18:56:28 by tkondrac         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 //
 // Created by tkondrac on 28.01.22.
 //
@@ -9,7 +21,8 @@
 /// \param x 1st row
 /// \param y 2nd row
 /// \param z 3rd row
-double	**set_matrix(t_matrix a, const t_vec3d x, const t_vec3d y, const t_vec3d z)
+double	**set_matrix(t_matrix a, const t_vec3d x,
+		const t_vec3d y, const t_vec3d z)
 {
 	a[0][0] = x[0];
 	a[0][1] = x[1];
